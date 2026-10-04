@@ -12,7 +12,10 @@ const sidebar = document.querySelector("[data-sidebar]");
 const sidebarBtn = document.querySelector("[data-sidebar-btn]");
 
 // sidebar toggle functionality for mobile
-sidebarBtn.addEventListener("click", function () { elementToggleFunc(sidebar); });
+sidebarBtn.addEventListener("click", function () {
+  elementToggleFunc(sidebar);
+  sidebarBtn.setAttribute("aria-expanded", sidebar.classList.contains("active"));
+});
 
 
 
@@ -52,6 +55,13 @@ for (let i = 0; i < testimonialsItem.length; i++) {
 // add click event to modal close button
 modalCloseBtn.addEventListener("click", testimonialsModalFunc);
 overlay.addEventListener("click", testimonialsModalFunc);
+
+// close modal with Escape key
+document.addEventListener("keydown", function (e) {
+  if (e.key === "Escape" && modalContainer.classList.contains("active")) {
+    testimonialsModalFunc();
+  }
+});
 
 
 
@@ -136,24 +146,44 @@ for (let i = 0; i < formInputs.length; i++) {
 
 
 
+// contact form: open the visitor's mail client with the message prefilled
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+  const data = new FormData(form);
+  const to = document.querySelector('.contact-link[href^="mailto:"]').getAttribute("href");
+  const subject = encodeURIComponent("Message from " + data.get("fullname"));
+  const body = encodeURIComponent(data.get("message") + "\n\n" + data.get("fullname") + " (" + data.get("email") + ")");
+  window.location.href = to + "?subject=" + subject + "&body=" + body;
+});
+
+
+
 // page navigation variables
 const navigationLinks = document.querySelectorAll("[data-nav-link]");
 const pages = document.querySelectorAll("[data-page]");
 
-// add event to all nav link
+// show a page by name and keep the URL hash in sync (deep links, back button)
+const showPage = function (name) {
+  if (!Array.from(pages).some(function (p) { return p.dataset.page === name; })) { name = "about"; }
+  for (let i = 0; i < pages.length; i++) {
+    const match = name === pages[i].dataset.page;
+    pages[i].classList.toggle("active", match);
+    navigationLinks[i].classList.toggle("active", match);
+  }
+  window.scrollTo(0, 0);
+};
+
 for (let i = 0; i < navigationLinks.length; i++) {
   navigationLinks[i].addEventListener("click", function () {
-
-    for (let i = 0; i < pages.length; i++) {
-      if (this.innerHTML.toLowerCase() === pages[i].dataset.page) {
-        pages[i].classList.add("active");
-        navigationLinks[i].classList.add("active");
-        window.scrollTo(0, 0);
-      } else {
-        pages[i].classList.remove("active");
-        navigationLinks[i].classList.remove("active");
-      }
-    }
-
+    const name = this.textContent.trim().toLowerCase();
+    showPage(name);
+    history.pushState(null, "", "#" + name);
   });
 }
+
+window.addEventListener("hashchange", function () {
+  showPage(location.hash.slice(1) || "about");
+});
+
+// open the page named in the URL on load
+if (location.hash) { showPage(location.hash.slice(1)); }

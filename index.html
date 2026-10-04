@@ -5,7 +5,14 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>vCard - Personal Portfolio</title>
+  <title>Richard Hanrick | Web Developer Portfolio</title>
+  <meta name="description" content="Portfolio of Richard Hanrick, a web developer and UI/UX designer: services, resume, projects, blog and contact details.">
+  <meta name="theme-color" content="#121212">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Richard Hanrick | Web Developer Portfolio">
+  <meta property="og:description" content="Web developer and UI/UX designer. Explore projects, resume and get in touch.">
+  <meta property="og:image" content="./website-demo-image/desktop.png">
+  <meta name="twitter:card" content="summary_large_image">
 
   <!--
     - favicon
@@ -51,7 +58,7 @@
           <p class="title">Web developer</p>
         </div>
 
-        <button class="info_more-btn" data-sidebar-btn>
+        <button class="info_more-btn" data-sidebar-btn aria-expanded="false">
           <span>Show Contacts</span>
 
           <ion-icon name="chevron-down"></ion-icon>
@@ -128,19 +135,19 @@
         <ul class="social-list">
 
           <li class="social-item">
-            <a href="#" class="social-link">
+            <a href="#" class="social-link" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
               <ion-icon name="logo-facebook"></ion-icon>
             </a>
           </li>
 
           <li class="social-item">
-            <a href="#" class="social-link">
+            <a href="#" class="social-link" aria-label="Twitter" target="_blank" rel="noopener noreferrer">
               <ion-icon name="logo-twitter"></ion-icon>
             </a>
           </li>
 
           <li class="social-item">
-            <a href="#" class="social-link">
+            <a href="#" class="social-link" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
               <ion-icon name="logo-instagram"></ion-icon>
             </a>
           </li>
@@ -237,8 +244,7 @@
             <li class="service-item">
 
               <div class="service-icon-box">
-                <img src="./assets/images/icon-design.svg
-                " alt="design icon" width="40">
+                <img src="./assets/images/icon-design.svg" alt="design icon" width="40">
               </div>
 
               <div class="service-content-box">
@@ -415,9 +421,9 @@
 
           <div class="overlay" data-overlay></div>
 
-          <section class="testimonials-modal">
+          <section class="testimonials-modal" role="dialog" aria-modal="true" aria-label="Testimonial">
 
-            <button class="modal-close-btn" data-modal-close-btn>
+            <button class="modal-close-btn" data-modal-close-btn aria-label="Close testimonial">
               <ion-icon name="close-outline"></ion-icon>
             </button>
 
@@ -1158,12 +1164,12 @@
           <form action="#" class="form" data-form>
 
             <div class="input-wrapper">
-              <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
+              <input type="text" name="fullname" class="form-input" placeholder="Full name" aria-label="Full name" autocomplete="name" required data-form-input>
 
-              <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
+              <input type="email" name="email" class="form-input" placeholder="Email address" aria-label="Email address" autocomplete="email" required data-form-input>
             </div>
 
-            <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
+            <textarea name="message" class="form-input" placeholder="Your Message" aria-label="Your message" required data-form-input></textarea>
 
             <button class="form-btn" type="submit" disabled data-form-btn>
               <ion-icon name="paper-plane"></ion-icon>
