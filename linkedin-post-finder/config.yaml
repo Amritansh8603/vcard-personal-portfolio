@@ -1,0 +1,16 @@
+# Edit this file to change what the pipeline looks for.
+roles:                    # a post must mention at least one
+  - software engineer
+  - backend developer
+  - python developer
+experience:
+  min_years: 2            # your experience range; posts asking for a
+  max_years: 4            # range that overlaps this one will match
+  include_fresher: false  # also match "fresher / entry level / 0-1 years"
+hiring_keywords:          # a post must mention at least one
+  - hiring
+  - opening
+  - vacancy
+  - "we are looking"
+locations: []             # optional, e.g. [bangalore, remote]; empty = any
+max_results_per_query: 20 # Google CSE returns 10 per page, max 100 total
